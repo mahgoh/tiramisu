@@ -162,10 +162,12 @@ func (c *Component) FullDiagram() string {
 func (c *Component) UpstreamDiagram() string {
 	relations := []string{}
 	for _, dep := range c.Dependencies {
+		// ignore non-measure sheet dependencies
 		if dep.TypeName != "MeasureSheet" {
 			continue
 		}
 
+		// ignore self-dependencies
 		if dep.Id == c.Id {
 			continue
 		}
@@ -183,10 +185,12 @@ func (c *Component) UpstreamDiagram() string {
 func (c *Component) DownstreamDiagram() string {
 	relations := []string{}
 	for _, dep := range c.Dependents {
+		// ignore non-measure sheet dependencies
 		if dep.TypeName != "MeasureSheet" {
 			continue
 		}
 
+		// ignore self-dependencies
 		if dep.Id == c.Id {
 			continue
 		}
